@@ -3,6 +3,7 @@
     <form class="search__form" id="search__form" @submit="search">
       <input
         v-model="searchStr"
+        :disabled="loading"
         minlength="3"
         maxlength="100"
         type="text"
@@ -76,7 +77,8 @@ export default {
       searchStr: "",
       results: [],
       noResults: false,
-      showAll: false
+      showAll: false,
+      loading: false
     };
   },
   computed: {
@@ -87,7 +89,8 @@ export default {
   methods: {
     search(event) {
       event.preventDefault();
-      if (!this.searchStr) return;
+      if (!this.searchStr || this.loading) return;
+      this.loading = true;
       get(this.searchStr)
         .then(data => {
           this.results = data;
@@ -99,6 +102,7 @@ export default {
         .finally(() => {
           this.noResults = !this.results.length;
           this.showAll = false;
+          this.loading = false;
         });
     },
     toggleResults() {
@@ -144,6 +148,8 @@ export default {
       text-align center
       &::placeholder
         color lighten(#2c3e50, 70%)
+      &[disabled]
+        background-color transparent
       @media screen and (max-width: 650px) {
         font-size 14px
       }
