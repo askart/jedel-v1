@@ -61,6 +61,10 @@ export default {
     noResults: {
       type: Boolean,
       default: false
+    },
+    showAll: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -72,7 +76,7 @@ export default {
   },
   methods: {
     toggleResults() {
-      this.showAll = !this.showAll;
+      this.$emit("toggle-show");
       this.$nextTick(() => {
         document.getElementById("results").scrollIntoView();
       });

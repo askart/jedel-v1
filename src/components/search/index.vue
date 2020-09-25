@@ -17,6 +17,8 @@
       :items="items"
       :count="results.length"
       :no-results="noResults"
+      :show-all="showAll"
+      @toggle-show="showAll = !showAll"
     />
   </div>
 </template>
