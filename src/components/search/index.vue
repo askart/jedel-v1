@@ -87,7 +87,7 @@ export default {
   methods: {
     search(event) {
       event.preventDefault();
-      console.log("asd");
+      if (!this.searchStr) return;
       get(this.searchStr)
         .then(data => {
           this.results = data;
