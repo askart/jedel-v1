@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <div class="search__form">
+    <form class="search__form" id="search__form" @submit="search">
       <input
         v-model="searchStr"
         minlength="3"
@@ -9,10 +9,10 @@
         class="search__form__input"
         placeholder="Введите название"
         autofocus
-        @change="search"
       />
-    </div>
-    <div class="search__results">
+      <input type="submit" hidden />
+    </form>
+    <div class="search__results" id="results">
       <div
         class="search__results__item"
         v-for="(item, index) in items"
@@ -22,27 +22,32 @@
           <span>{{ item.name }}</span>
         </div>
         <div class="search__results__item__price">
-          <tengeIcon class="icon"/>
+          <tengeIcon class="icon" />
           <span>{{ item.price }} тг.</span>
         </div>
         <div class="search__results__item__comp_name">
-          <clinicIcon class="icon"/>
+          <plusCircleIcon class="icon" />
           <span>{{ item.comp_name }}</span>
         </div>
         <div class="search__results__item__phone" v-if="item.phone">
-          <phoneIcon class="icon"/>
+          <phoneIcon class="icon" />
           <a :href="`tel:${item.phone}`" target="__blank">{{ item.phone }}</a>
         </div>
         <div class="search__results__item__point_address">
-          <mapMarkerIcon class="icon"/>
+          <clinicIcon class="icon" />
           <span>{{ item.point_address }}</span>
         </div>
         <div class="search__results__item__location">
-          <mapMarkerIcon class="icon"/>
+          <mapMarkerIcon class="icon" />
           <a :href="item.location" target="__blank">Показать на карте</a>
         </div>
       </div>
-      <div v-show="noResults" class="search__results__empty">
+      <div v-if="results.length > 5" class="search__results__toggle">
+        <button class="text-btn" @click="toggleResults">
+          {{ showAll ? "Скрыть" : "Поcмотреть все результаты" }}
+        </button>
+      </div>
+      <div v-if="noResults" class="search__results__empty">
         Нет результатов
       </div>
     </div>
@@ -51,10 +56,11 @@
 
 <script>
 import { get } from "@/api/pharmas";
-import clinicIcon from "@/components/icons/clinic"
-import mapMarkerIcon from "@/components/icons/map-marker"
-import phoneIcon from "@/components/icons/phone"
-import tengeIcon from "@/components/icons/tenge"
+import clinicIcon from "@/components/icons/clinic";
+import mapMarkerIcon from "@/components/icons/map-marker";
+import phoneIcon from "@/components/icons/phone";
+import tengeIcon from "@/components/icons/tenge";
+import plusCircleIcon from "@/components/icons/plus-circle";
 
 export default {
   name: "Search",
@@ -62,28 +68,44 @@ export default {
     clinicIcon,
     mapMarkerIcon,
     phoneIcon,
-    tengeIcon
+    tengeIcon,
+    plusCircleIcon
   },
   data() {
     return {
       searchStr: "",
-      items: [],
-      noResults: false
+      results: [],
+      noResults: false,
+      showAll: false
     };
   },
+  computed: {
+    items() {
+      return this.showAll ? this.results : this.results.slice(0, 5);
+    }
+  },
   methods: {
-    search() {
+    search(event) {
+      event.preventDefault();
+      console.log("asd");
       get(this.searchStr)
         .then(data => {
-          this.items = data;
+          this.results = data;
         })
         .catch(e => {
-          this.items = [];
+          this.results = [];
           throw e;
         })
         .finally(() => {
-          this.noResults = !this.items.length;
+          this.noResults = !this.results.length;
+          this.showAll = false;
         });
+    },
+    toggleResults() {
+      this.showAll = !this.showAll;
+      this.$nextTick(() => {
+        document.getElementById("results").scrollIntoView();
+      });
     }
   }
 };
@@ -102,7 +124,11 @@ export default {
     box-sizing border-box
     border-radius 8px
     background-color white
-    box-shadow 0px 5px 10px 0px rgba(207,240,253,1)
+    box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.2)
+    transition box-shadow .3s ease-in-out
+    &:hover, &:focus {
+      box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.35)
+    }
     @media screen and (max-width: 650px) {
       height 40px
       padding 5px
@@ -124,32 +150,40 @@ export default {
   &__results
     margin 35px 0 100px
     text-align left
-    @media screen and (max-width: 850px) {
+    @media screen and (max-width: 650px) {
       margin 15px 0 100px
     }
     &__item
       display grid
-      grid-template-columns 200px auto auto 120px
+      grid-template-columns 200px auto
       grid-template-rows: auto
-      grid-template-areas: "item-name item-name item-name item-name" "item-price item-point_address item-point_address ." "item-comp_name item-location . ." "item-phone . . ."
-      padding 20px 5px
-      margin 0 50px
+      grid-template-areas: "item-name item-name" "item-price item-point_address" "item-comp_name item-location" "item-phone ."
+      padding 20px 25px
+      margin 0 auto
+      width calc(100% - 80px)
+      box-shadow 0px 5px 10px 0px lighten(#2c3e50, 95%)
+      border 1px solid lighten(#2c3e50, 90%)
+      border-radius 10px
       font-size 14px
+      transition box-shadow .3s ease-in-out
+      &:hover {
+        box-shadow 0px 5px 10px 0px lighten(#2c3e50, 88%)
+      }
       @media screen and (max-width: 950px) {
         grid-template-columns 200px auto 120px
-        grid-template-areas: "item-name item-name item-name" "item-price item-point_address item-point_address" "item-comp_name item-location ." "item-phone . ."
+        grid-template-areas: "item-name item-name" "item-price item-point_address" "item-comp_name item-location" "item-phone ."
       }
       @media screen and (max-width: 850px) {
         grid-template-columns auto
         grid-template-areas: "item-name" "item-price" "item-comp_name" "item-phone" "item-point_address" "item-location"
-        margin 0 10px
       }
       @media screen and (max-width: 650px) {
-        padding 15px 5px
+        width calc(100% - 50px)
+        padding 15px 20px
         font-size 12px
       }
       &:not(:first-child)
-        border-top 1px solid lighten(#2c3e50, 95%)
+        margin-top 15px
       & .icon
         width 20px
         height 20px
@@ -173,40 +207,47 @@ export default {
         grid-area item-name
         margin-bottom 10px
         font-size 16px
-        font-weight bold
+        font-weight 400
         @media screen and (max-width: 650px) {
           font-size 14px
         }
       &__price
         grid-area item-price
         & > .icon
-          color green
-          border-color green
+          color #77815c
+          border-color #77815c
       &__comp_name
         grid-area item-comp_name
         & > .icon
-          color green
-          border-color green
+          color #77815c
+          border-color #77815c
       &__phone
         grid-area item-phone
         & > .icon
-          color green
-          border-color green
+          color #77815c
+          border-color #77815c
       &__point_address
         grid-area item-point_address
         & > .icon
-          color #FFB92E
-          border-color #FFB92E
+          color #77815c
+          border-color #77815c
       &__location
         grid-area item-location
         & > .icon
-          color #FFB92E
-          border-color #FFB92E
+          color #77815c
+          border-color #77815c
     &__empty
       margin-top 25px
       text-align center
       font-size 16px
       color lighten(#2c3e50, 50%)
+      @media screen and (max-width: 650px) {
+        font-size 14px
+      }
+    &__toggle
+      margin-top 25px
+      text-align center
+      font-size 16px
       @media screen and (max-width: 650px) {
         font-size 14px
       }

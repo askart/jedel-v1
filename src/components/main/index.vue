@@ -16,6 +16,7 @@ export default {
   flex-flow column nowrap
   margin 0 auto 100px
   width calc(100% - 50px)
+  max-width 950px
   min-height 700px
   @media screen and (max-width: 650px) {
     width calc(100% - 20px)
