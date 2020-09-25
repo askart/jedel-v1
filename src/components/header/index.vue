@@ -22,4 +22,8 @@ export default {
   height 200px
   box-sizing border-box
   border-radius 15px
+  @media screen and (max-width: 650px) {
+    height 150px
+    width calc(100% - 20px)
+  }
 </style>
