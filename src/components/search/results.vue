@@ -100,13 +100,13 @@ export default {
     padding 20px 25px
     margin 0 auto
     width calc(100% - 80px)
-    box-shadow 0px 5px 10px 0px lighten(#2c3e50, 95%)
+    box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.1)
     border 1px solid lighten(#2c3e50, 90%)
     border-radius 10px
     font-size 14px
     transition box-shadow .3s ease-in-out
     &:hover {
-      box-shadow 0px 5px 10px 0px lighten(#2c3e50, 88%)
+      box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.2)
     }
     @media screen and (max-width: 950px) {
       grid-template-columns 200px auto 120px
@@ -124,6 +124,7 @@ export default {
     &:not(:first-child)
       margin-top 15px
     & .icon
+      flex 0 0 auto
       width 20px
       height 20px
       color lighten(#2c3e50, 70%)
