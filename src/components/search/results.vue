@@ -103,7 +103,7 @@ export default {
     background-color #fff
     box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.05)
     border 1px solid lighten(#77815c, 90%)
-    border-radius 10px
+    border-radius 5px
     font-size 14px
     transition box-shadow .3s ease-in-out
     &:hover {
@@ -123,7 +123,7 @@ export default {
       font-size 12px
     }
     &:not(:first-child)
-      margin-top 15px
+      margin-top 5px
     & .icon
       flex 0 0 auto
       width 20px
