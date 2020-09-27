@@ -38,7 +38,6 @@ a
 
 input
   font unset
-  font-weight 400
 
 .text-btn
   background none
