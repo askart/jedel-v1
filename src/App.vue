@@ -36,6 +36,10 @@ body
 a
   color #77815c
 
+input
+  font unset
+  font-weight 400
+
 .text-btn
   background none
   outline none
