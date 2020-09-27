@@ -100,13 +100,14 @@ export default {
     padding 20px 25px
     margin 0 auto
     width calc(100% - 80px)
-    box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.1)
-    border 1px solid lighten(#2c3e50, 90%)
+    background-color #fff
+    box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.05)
+    border 1px solid lighten(#77815c, 90%)
     border-radius 10px
     font-size 14px
     transition box-shadow .3s ease-in-out
     &:hover {
-      box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.2)
+      box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.15)
     }
     @media screen and (max-width: 950px) {
       grid-template-columns 200px auto 120px
@@ -127,10 +128,10 @@ export default {
       flex 0 0 auto
       width 20px
       height 20px
-      color lighten(#2c3e50, 70%)
       padding 3px
       box-sizing border-box
-      border 1px solid lighten(#2c3e50, 70%)
+      color #77815c
+      border 1px solid #77815c
       border-radius 50%
     & > *
       display flex
@@ -153,29 +154,14 @@ export default {
       }
     &__price
       grid-area item-price
-      & > .icon
-        color #77815c
-        border-color #77815c
     &__comp_name
       grid-area item-comp_name
-      & > .icon
-        color #77815c
-        border-color #77815c
     &__phone
       grid-area item-phone
-      & > .icon
-        color #77815c
-        border-color #77815c
     &__point_address
       grid-area item-point_address
-      & > .icon
-        color #77815c
-        border-color #77815c
     &__location
       grid-area item-location
-      & > .icon
-        color #77815c
-        border-color #77815c
   &__empty
     margin-top 25px
     text-align center

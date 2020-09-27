@@ -26,7 +26,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 body
-  background-color #fff
+  background-color darken(#fff, 2%)
   margin 0
   font-family 'Roboto', sans-serif
   font-size 14px
@@ -64,6 +64,5 @@ a
   max-width 1200px
   min-height 100vh
   height auto
-  background-color #fff
   border-radius 25px 25px 0 0
 </style>
