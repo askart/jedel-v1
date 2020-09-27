@@ -23,14 +23,14 @@ export default {
 </script>
 
 <style lang="stylus">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 body
   background-color darken(#fff, 2%)
   margin 0
   font-family 'Roboto', sans-serif
   font-size 14px
-  font-weight 300
+  font-weight 400
   color #2c3e50
 
 a
@@ -48,7 +48,6 @@ input
   cursor pointer
   color #77815c
   font-family 'Roboto', sans-serif
-  font-weight 300
   font-size 16px
   text-decoration underline
   @media screen and (max-width: 650px) {

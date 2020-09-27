@@ -147,10 +147,11 @@ export default {
     &__name
       grid-area item-name
       margin-bottom 10px
-      font-size 16px
-      font-weight 400
+      font-size 14px
+      font-weight 500
+      line-height 1.25
       @media screen and (max-width: 650px) {
-        font-size 14px
+        font-size 12px
       }
     &__price
       grid-area item-price
