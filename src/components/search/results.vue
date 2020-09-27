@@ -101,7 +101,7 @@ export default {
     grid-template-areas: "item-name item-name" "item-price item-point_address" "item-comp_name item-location" "item-phone ."
     padding 20px 25px
     margin 0 auto
-    width calc(100% - 80px)
+    width 100%
     background-color #fff
     box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.05)
     border 1px solid lighten(#77815c, 90%)
@@ -121,7 +121,6 @@ export default {
       grid-template-areas: "item-name" "item-price" "item-comp_name" "item-phone" "item-point_address" "item-location"
     }
     @media screen and (max-width: 650px) {
-      width calc(100% - 10px)
       padding 20px 20px 15px
       font-size 12px
     }
@@ -161,6 +160,7 @@ export default {
         position relative
         background-color lighten(#77815c, 80%)
         color #77815c
+        border-radius 2px
         font-size 12px
         padding 3px 8px
         &:before
