@@ -6,6 +6,8 @@
       :key="index"
     >
       <div class="search__results__item__name">
+        <span class="search__results__item__name__instock" v-if="item.units > 0">В наличии</span>
+        <span class="search__results__item__name__instock--not" v-else>Нет в наличии</span>
         <span>{{ item.name }}</span>
       </div>
       <div class="search__results__item__price">
@@ -104,6 +106,7 @@ export default {
     box-shadow 0px 5px 10px 0px rgba(119, 129, 92,0.05)
     border 1px solid lighten(#77815c, 90%)
     border-radius 5px
+    box-sizing border-box
     font-size 14px
     transition box-shadow .3s ease-in-out
     &:hover {
@@ -118,8 +121,8 @@ export default {
       grid-template-areas: "item-name" "item-price" "item-comp_name" "item-phone" "item-point_address" "item-location"
     }
     @media screen and (max-width: 650px) {
-      width calc(100% - 50px)
-      padding 15px 20px
+      width calc(100% - 10px)
+      padding 20px 20px 15px
       font-size 12px
     }
     &:not(:first-child)
@@ -146,13 +149,33 @@ export default {
         margin-left 7px
     &__name
       grid-area item-name
-      margin-bottom 10px
+      display block
+      margin-bottom 5px
       font-size 14px
       font-weight 500
-      line-height 1.25
+      line-height 1.5
       @media screen and (max-width: 650px) {
         font-size 12px
       }
+      &__instock
+        position relative
+        background-color lighten(#77815c, 80%)
+        color #77815c
+        font-size 12px
+        padding 3px 8px
+        &:before
+          position relative
+          display inline-block
+          content ""
+          width 8px
+          height 8px
+          background-color #77815c
+          border-radius 50%
+          margin-right 5px
+        &--not
+          @extend .search__results__item__name__instock
+          &:before
+            background-color lighten(#77815c, 99%)
     &__price
       grid-area item-price
     &__comp_name
