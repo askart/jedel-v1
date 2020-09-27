@@ -6,8 +6,12 @@
       :key="index"
     >
       <div class="search__results__item__name">
-        <span class="search__results__item__name__instock" v-if="item.units > 0">В наличии</span>
-        <span class="search__results__item__name__instock--not" v-else>Нет в наличии</span>
+        <span class="search__results__item__name__instock" v-if="item.units > 0"
+          >В наличии</span
+        >
+        <span class="search__results__item__name__instock--not" v-else
+          >Нет в наличии</span
+        >
         <span>{{ item.name }}</span>
       </div>
       <div class="search__results__item__price">
