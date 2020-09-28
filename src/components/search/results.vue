@@ -24,7 +24,7 @@
       </div>
       <div class="search__results__item__phone" v-if="item.phone">
         <phoneIcon class="icon" />
-        <a :href="`tel:${item.phone}`" target="__blank">{{ item.phone }}</a>
+        <a :href="`tel:${item.phone}`" target="_blank">{{ item.phone }}</a>
       </div>
       <div class="search__results__item__point_address">
         <clinicIcon class="icon" />
@@ -32,7 +32,7 @@
       </div>
       <div class="search__results__item__location">
         <mapMarkerIcon class="icon" />
-        <a :href="item.location" target="__blank">Показать на карте</a>
+        <a :href="item.location" target="_blank">Показать на карте</a>
       </div>
     </div>
     <div v-if="count > 5" class="search__results__toggle">
