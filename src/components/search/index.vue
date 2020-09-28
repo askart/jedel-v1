@@ -1,6 +1,11 @@
 <template>
   <div class="search">
-    <form class="search__form" id="search__form" @submit="search">
+    <form
+      class="search__form"
+      id="search__form"
+      autocomplete="off"
+      @submit="search"
+    >
       <input
         v-model="searchStr"
         :disabled="loading"
@@ -9,6 +14,7 @@
         type="text"
         class="search__form__input"
         placeholder="Введите название"
+        autocomplete="off"
         autofocus
       />
       <input type="submit" hidden />
